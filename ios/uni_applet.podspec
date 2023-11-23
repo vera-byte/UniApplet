@@ -5,10 +5,10 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
  is a framework built for native Apps to run mini program front-end projects developed based on uni-app, thereby helping native Apps quickly acquire the capabilities of Mini Programs
                        DESC
-  s.homepage         = 'https://github.com/vera-byte/flutter_unimp'
+  s.homepage         = 'https://github.com/vera-byte/UniApplet'
   s.license          = { :file => '../LICENSE', :type => 'MIT' }
   s.author           = { 'vera-byte' => 'xykj@email.metoyun.com' }
-  s.source           = { :git => 'https://github.com/vera-byte/flutter_unimp.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/vera-byte/UniApplet.git', :tag => s.version.to_s }
 
   # 添加unimp依赖的系统库
   s.frameworks = 'JavaScriptCore','CoreMedia','MediaPlayer','AVFoundation','AVKit','GLKit','OpenGLES','CoreText','QuartzCore','CoreGraphics','QuickLook','CoreTelephony'
@@ -19,15 +19,16 @@ Pod::Spec.new do |s|
   s.source_files     = 'Classes/**/*.{swift,m}','Classes/UniMPSDK/Core/Headers/*.h'
 
   # Specify resources
-  s.resources        = 'Classes/UniMPSDK/Core/Resources/*.{js,bundle,ttf,png}',
-                        'Classes/UniMPSDK/Features/Resources/*.{bundle,png}'
+  s.resources        = 'Classes/UniMPSDK/Core/Resources/*.{js,bundle,ttf,png}','Classes/UniMPSDK/Apps/*.wgt'
+                        
  
   # Specify vendored libraries
   s.vendored_libraries = 'Classes/UniMPSDK/Core/Libs/*.a',
   #                        'Classes/UniMPSDK/Features/Libs/*.a'
 
   # Specify vendored frameworks
-  s.vendored_frameworks = 'Classes/UniMPSDK/Features/Libs/*.framework','Classes/UniMPSDK/Core/Libs/storage.framework'
+  s.vendored_frameworks = 'Classes/UniMPSDK/Core/Libs/storage.framework'
+  # 'Classes/UniMPSDK/Features/Libs/*.framework',
 
   # Specify public header files
   s.public_header_files = 'Classes/UniMPSDK/Core/Headers/*.h'

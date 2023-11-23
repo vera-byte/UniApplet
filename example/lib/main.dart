@@ -17,7 +17,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _uniAppletPlugin = UniApplet();
+  String _callBackMessage = '';
+  final _unimpPlugin = Unimp();
 
   @override
   void initState() {
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _uniAppletPlugin.getPlatformVersion() ?? 'Unknown platform version';
+          await _unimpPlugin.getPlatformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -54,8 +55,32 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: ListView(
+          children: [
+            Text('Running on: $_platformVersion\n'),
+            Text(
+              '_callBackMessage on: $_callBackMessage\n',
+              style: const TextStyle(color: Colors.red),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                String? value = await _unimpPlugin.initUniMp();
+                setState(() {
+                  _callBackMessage = value ?? "";
+                });
+              },
+              child: const Text("初始化Unimp"),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                String? value = await _unimpPlugin.openUniMp("__UNI__11E9B73");
+                setState(() {
+                  _callBackMessage = value ?? "";
+                });
+              },
+              child: const Text("打开__UNI__11E9B73"),
+            ),
+          ],
         ),
       ),
     );
