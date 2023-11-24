@@ -29,7 +29,7 @@ public class UniAppletPlugin: NSObject, FlutterPlugin {
     }
   }
     func openUniMP(arguments:[String: Any]) -> String {
-       let AppID = arguments["AppID"] as? String ?? ""
+        let AppID = arguments["AppID"] as? String ?? ""
        let Path = arguments["Path"] as? String ?? ""
        let ExtraData = arguments["ExtraData"] as? [String: Any] ?? [:]
         var callBackMessage = "no err:"+AppID;
@@ -37,20 +37,49 @@ public class UniAppletPlugin: NSObject, FlutterPlugin {
             callBackMessage =  "AppId Is Empty"
             return callBackMessage
         }
-        checkUniMPResoutce(appid: AppID)
-        let configuration = DCUniMPConfiguration.init()
-        configuration.enableBackground = true
+      checkUniMPResoutce(appid: AppID)
+ let configuration = DCUniMPConfiguration()
+      configuration.enableBackground = true
+      configuration.extraData = ExtraData
+      configuration.path  = Path
+      
+      print("小程序启动参数：\(ExtraData)","小程序页面路径", Path,"小程序Appid", AppID)
+      
+      DCUniMPSDKEngine.openUniMP(AppID, configuration: configuration) { instance, error in
+          if let instance = instance {
+              print("小程序打开成功")
+              // 在此处处理小程序实例对象 instance
+          } else if let error = error {
+              print(error)
+              // 在此处处理打开小程序时的错误 error
+          }
+      }
+
+return "open";
+
+
+      //  let AppID = arguments["AppID"] as? String ?? ""
+      //  let Path = arguments["Path"] as? String ?? ""
+      //  let ExtraData = arguments["ExtraData"] as? [String: Any] ?? [:]
+      //   var callBackMessage = "no err:"+AppID;
+      //   if AppID == "" {
+      //       callBackMessage =  "AppId Is Empty"
+      //       return callBackMessage
+      //   }
+      //   checkUniMPResoutce(appid: AppID)
+      //   let configuration = DCUniMPConfiguration.init()
+      //   configuration.enableBackground = false
         
-        DCUniMPSDKEngine.openUniMP(AppID, configuration: configuration) { instance, error in
-            if instance != nil {
-                callBackMessage = "小程序打开成功"
-                print(callBackMessage)
-            } else {
-                callBackMessage = "打开失败"
-                print(error as Any)
-            }
-        }
-        return callBackMessage
+      //   DCUniMPSDKEngine.openUniMP(AppID, configuration: configuration) { instance, error in
+      //       if instance != nil {
+      //           callBackMessage = "小程序打开成功"
+      //           print(callBackMessage)
+      //       } else {
+      //           callBackMessage = "打开失败"
+      //           print(error as Any)
+      //       }
+      //   }
+      //   return callBackMessage
     }
     
     func checkUniMPResoutce(appid: String) -> Void {

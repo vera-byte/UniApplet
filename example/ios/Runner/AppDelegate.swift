@@ -9,10 +9,10 @@ import Flutter
   ) -> Bool {
       
     GeneratedPluginRegistrant.register(with: self)
-      let options = NSMutableDictionary(dictionary: launchOptions ?? [:])
-              options.setValue(NSNumber(value:true), forKey: "debug")
+      // let options = NSMutableDictionary(dictionary: launchOptions ?? [:])
+      //         options.setValue(NSNumber(value:true), forKey: "debug")
                 
-      DCUniMPSDKEngine.initSDKEnvironment(launchOptions: options as! [AnyHashable : Any]);
+      // DCUniMPSDKEngine.initSDKEnvironment(launchOptions: options as! [AnyHashable : Any]);
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
